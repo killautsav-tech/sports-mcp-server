@@ -7,7 +7,7 @@
 import { z } from "zod";
 import { fetchJson, buildUrl } from "./http.js";
 
-const BASE = "https://api.sportmonks.com/api/v3/football";
+const BASE = "https://api.sportmonks.com/v3/football";
 
 // ── Helpers ──
 
@@ -16,7 +16,12 @@ function smUrl(
   apiToken: string,
   extra: Record<string, string | number | boolean | undefined> = {}
 ): string {
-  return buildUrl(BASE, path, { api_token: apiToken, ...extra });
+  const url = new URL(BASE + path);
+  url.searchParams.set("api_token", apiToken);
+  for (const [k, v] of Object.entries(extra)) {
+    if (v !== undefined && v !== "") url.searchParams.set(k, String(v));
+  }
+  return url.toString();
 }
 
 function metaInfo(data: unknown): string {
