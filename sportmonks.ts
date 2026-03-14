@@ -7,7 +7,7 @@
 import { z } from "zod";
 import { fetchJson, buildUrl } from "./http.js";
 
-const BASE = "https://api.sportmonks.com/v3/football";
+const BASE = "https://api.sportmonks.com/api/v3/football";
 
 // ── Helpers ──
 
