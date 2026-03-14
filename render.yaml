@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: sports-mcp-server
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: node dist/server-http.js
+    envVars:
+      - key: ODDS_API_KEY
+        sync: false
+      - key: SPORTMONKS_TOKEN
+        sync: false
+      - key: PORT
+        value: 3456
